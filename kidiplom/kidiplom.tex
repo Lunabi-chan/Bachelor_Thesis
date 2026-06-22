@@ -145,7 +145,7 @@
 \section{Úvod}
 
 \subsection{Motivace}
-Firma Edhouse, zabývající se vývojem software a hardware, přijímá každým rokem nové stážisty. Kvůli velkému zájmu ale vyhodnocování vstupních programátorských úkolů začalo být neudržitelné. Nejen že museli mentoři úkoly manuálně stahovat a testovat, museli kontrolovat úkoly v různých jazycích. Tento proces zdržoval náborové řízení a bral hodně času programátorům od jejich dedikované práci. Motivací aplikace inQuest je tedy proces kontroly stážistických úkolů zautomatizovat, aby se mentoři mohli zabývat až posudkem kvality kódu.
+Firma Edhouse, zabývající se vývojem software a hardware, přijímá každým rokem nové stážisty. Kvůli velkému zájmu ale vyhodnocování vstupních programátorských úkolů začalo být neudržitelné. Nejen že museli mentoři úkoly manuálně stahovat a testovat, museli kontrolovat úkoly v různých jazycích. Tento proces zdržoval náborové řízení a bral hodně času programátorům od jejich práci. Motivací aplikace inQuest je tedy proces kontroly stážistických úkolů zautomatizovat, aby se mentoři mohli zabývat až posudkem kvality kódu.
 
 \subsection{Cíl práce}
 Cílem bakalářské práce je navrhnout a vyvinout systém pro kontrolu programátorských úkolů. Výsledný systém musí být schopen autonomně stáhnout kód z GitHub repozitáře, detekovat programovací jazyk a v izolovaném kontejnerovém prostředí bezpečně ověřit strukturu projektu, úspěšnost kompilace a funkčnost běhu programu. Technickým cílem je postavit robustní backend v C\# (.NET) s asynchronní architekturou využívající RabbitMQ. 
@@ -176,9 +176,9 @@ AutoMapper je open-source knihovna pro C\# a .NET, která slouží jako objektov
 Vzhledem k tomu, že systém zpracovává a spouští neověřené zdrojové kódy od externích uchazečů, existovalo riziko spuštění malwaru nebo nekonečných smyček. Z tohoto důvodu byla představena kontejnerizace.
 Podman (s alternativní možností Dockeru) je kontejnerizační nástroj pro správu kontejnerů. Narozdíl od Dockeru funguje v tzv. rootless režimu, což znamená, že kontejnery nepotřebují oprávnění správce za svého běhu. Dále nevyužívá centrální fázový proces (daemon) a díky tomu snižuje spotřebu zdrojů. Podman je kompatibilní se standardy OCI (Open Container Initiative) a jeho CLI rozhraní je podobné s Dockerem, jehož příkaz \kiinlinecode{text}{!}{docker} je nahrazen \kiinlinecode{text}{!}{podman}. 
 
-\subsection{RabbitMq}
-RabbitMq je open-source message broker který umožňuje aplikacím a službám asynchronně a spolehlivě vyměňovat si data mezi sebou. Je postaven na protokolu AMQP (Advanced Message Queuing Protocol), ale podporuje také další protokoly jako MQTT, STOMP nebo HTTP, což zajišťuje širokou kompatibilitu s různými technologiemi a jazyky. 
-Vyvíjená aplikace konzumuje zprávy z RabbitMq fronty, které tam přiřazují kontejnery s úspěšným doběhnutím.
+\subsection{RabbitMQ}
+RabbitMQ je open-source message broker který umožňuje aplikacím a službám asynchronně a spolehlivě vyměňovat si data mezi sebou. Je postaven na protokolu AMQP (Advanced Message Queuing Protocol), ale podporuje také další protokoly jako MQTT, STOMP nebo HTTP, což zajišťuje širokou kompatibilitu s různými technologiemi a jazyky. 
+Po úspěšném doběhnutí předá testovací kontejner výsledná data do fronty RabbitMQ. Vyvíjená aplikace tyto zprávy následně odebírá a zpracovává.
 
 \section{Architektura a návrh systému}
 \subsection{Clean Architecture}
