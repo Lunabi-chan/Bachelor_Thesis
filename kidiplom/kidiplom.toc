@@ -9,7 +9,7 @@
 \contentsline {paragraph}{\numberline {3.1.1.1}Entity Framework Core}{8}{paragraph.3.1.1.1}%
 \contentsline {paragraph}{\numberline {3.1.1.2}AutoMapper}{8}{paragraph.3.1.1.2}%
 \contentsline {subsection}{\numberline {3.2}Podman}{8}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}RabbitMq}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.3}RabbitMQ}{8}{subsection.3.3}%
 \contentsline {section}{\numberline {4}Architektura a návrh systému}{8}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Clean Architecture}{8}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Backend}{9}{subsection.4.2}%

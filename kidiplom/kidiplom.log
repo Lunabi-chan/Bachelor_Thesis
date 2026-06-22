@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.5.26)  22 JUN 2026 18:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.5.26)  22 JUN 2026 19:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1469,9 +1469,6 @@ L3 programming layer <2026-05-15>
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                kidiplom
 (biblatex)                and rerun LaTeX afterwards.
@@ -1505,10 +1502,10 @@ ts/type1/public/lm/lmr8.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/lm/l
 mri12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/texli
 ve/2026/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb><c:/texlive/2026/texmf-di
 st/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on kidiplom.pdf (18 pages, 299263 bytes).
+Output written on kidiplom.pdf (18 pages, 299518 bytes).
 PDF statistics:
- 393 PDF objects out of 1000 (max. 8388607)
- 343 compressed objects within 4 object streams
+ 394 PDF objects out of 1000 (max. 8388607)
+ 344 compressed objects within 4 object streams
  90 named destinations out of 1000 (max. 500000)
  299 words of extra memory for PDF output out of 10000 (max. 10000000)
 
