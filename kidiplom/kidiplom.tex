@@ -94,9 +94,9 @@
 
 %% Anotace práce, včetně anglické (obvykle překlad z jazyka
 %% práce). Jeden odstavec!
-\annotation{Při náboru na stážistické pozice ve firmách se programátorské úkoly uchazečů často kontrolují manuálně, což je při vysokém počtu zájemců časově velmi náročné. Práce na tento problém reaguje vývojem a implementací platformy InQuest pro firmu Edhouse, která celý proces validace automatizuje. Systém si po zadání odkazu na GitHub repozitář kód bezpečně stáhne a spustí ho v izolovaném kontejneru přes Podman nebo Docker. Zde ověří strukturu složek a zachytí výstupy z kompilace i samotného běhu programu. Řídicí aplikace je napsaná v C\# (.NET) a pro spolehlivou komunikaci s testovacími kontejnery využívá frontu zpráv RabbitMQ, přičemž výsledné reporty jsou přes API dostupné pro potřeby firmy.}
+\annotation{Při náboru na stážistické pozice ve firmách se programátorské úkoly uchazečů často kontrolují manuálně, což je při vysokém počtu zájemců časově velmi náročné. Práce na tento problém reaguje vývojem a implementací platformy InQuest pro firmu Edhouse, která celý proces validace automatizuje. Systém si po zadání odkazu na GitHub repozitář kód bezpečně stáhne a spustí ho v izolovaném kontejneru přes Podman nebo Docker. Zde ověří strukturu složek a zachytí výstupy z kompilace i samotného běhu programu. Řídicí aplikace je napsaná v \csharp{} (.NET) a pro spolehlivou komunikaci s testovacími kontejnery využívá frontu zpráv RabbitMQ, přičemž výsledné reporty jsou přes API dostupné pro potřeby firmy.}
 
-\annotation[english]{When recruiting for internship positions in companies, the programming tasks of applicants are often checked manually, which is very time-consuming when there is a large number of applicants. This work responds to this problem by developing and implementing the InQuest platform for the company Edhouse, which automates the entire validation process. After entering a link to the GitHub repository, the system safely downloads the code and runs it in an isolated container via Podman or Docker. Here, it verifies the folder structure and captures the outputs from compilation and the program run itself. The control application is written in C\# (.NET) and uses the RabbitMQ message queue for reliable communication with test containers, with the resulting reports available for the company's needs via API.}
+\annotation[english]{When recruiting for internship positions in companies, the programming tasks of applicants are often checked manually, which is very time-consuming when there is a large number of applicants. This work responds to this problem by developing and implementing the InQuest platform for the company Edhouse, which automates the entire validation process. After entering a link to the GitHub repository, the system safely downloads the code and runs it in an isolated container via Podman or Docker. Here, it verifies the folder structure and captures the outputs from compilation and the program run itself. The control application is written in \csharp{} (.NET) and uses the RabbitMQ message queue for reliable communication with test containers, with the resulting reports available for the company's needs via API.}
 
 %% Klíčová slova práce, včetně anglických. Oddělená (obvykle) středníkem.
 \keywords{automatizované testování, Podman, kontejnerizace, RabbitMQ, GitHub API}
@@ -148,13 +148,13 @@
 Firma Edhouse, zabývající se vývojem software a hardware, přijímá každým rokem nové stážisty. Kvůli velkému zájmu ale vyhodnocování vstupních programátorských úkolů začalo být neudržitelné. Nejen že museli mentoři úkoly manuálně stahovat a testovat, museli kontrolovat úkoly v různých jazycích. Tento proces zdržoval náborové řízení a bral hodně času programátorům od jejich práci. Motivací aplikace inQuest je tedy proces kontroly stážistických úkolů zautomatizovat, aby se mentoři mohli zabývat až posudkem kvality kódu.
 
 \subsection{Cíl práce}
-Cílem bakalářské práce je navrhnout a vyvinout systém pro kontrolu programátorských úkolů. Výsledný systém musí být schopen autonomně stáhnout kód z GitHub repozitáře, detekovat programovací jazyk a v izolovaném kontejnerovém prostředí bezpečně ověřit strukturu projektu, úspěšnost kompilace a funkčnost běhu programu. Technickým cílem je postavit robustní backend v C\# (.NET) s asynchronní architekturou využívající RabbitMQ. 
+Cílem bakalářské práce je navrhnout a vyvinout systém pro kontrolu programátorských úkolů. Výsledný systém musí být schopen autonomně stáhnout kód z GitHub repozitáře, detekovat programovací jazyk a v izolovaném kontejnerovém prostředí bezpečně ověřit strukturu projektu, úspěšnost kompilace a funkčnost běhu programu. Technickým cílem je postavit robustní backend v \csharp{} (.NET) s asynchronní architekturou využívající RabbitMQ. 
 
 Hlavní cíle tedy jsou:
 \begin{itemize}
 \item Analýza požadavků: Definovat potřeby firmy ohledně struktury testovaných úkolů a formátu výsledných reportů.
 \item Izolace a validace: Navrhnout kontejnerové prostředí, které zajistí bezpečné sestavení, spuštění a analýzu cizího kódu bez rizika pro firemní infrastrukturu.
-\item Asynchronní architektura: Propojit řídicí aplikaci v C\# (.NET) s exekučními kontejnery pomocí message brokera RabbitMQ.
+\item Asynchronní architektura: Propojit řídicí aplikaci v \csharp{} (.NET) s exekučními kontejnery pomocí message brokera RabbitMQ.
 \item Nasazení a integrace: Připravit API rozhraní pro snadné poskytování výsledných reportů.
 \end{itemize}
 
@@ -162,15 +162,15 @@ Hlavní cíle tedy jsou:
 
 \section{Dostupné nástroje a technologie}
 
-\subsection{C\# | .NET}
-Backend je implementován v programovacím jazyce C\# na platformě .NET8. .NET je bezplatná multiplatformní opensourcová vývojářská platforma pro vytváření mnoha druhů aplikací od společnosti Microsoft. 
+\subsection{\csharp{} | .NET}
+Backend je implementován v programovacím jazyce \csharp{} na platformě .NET8. .NET je bezplatná multiplatformní opensourcová vývojářská platforma pro vytváření mnoha druhů aplikací od společnosti Microsoft. 
 
 \subsubsection{Knihovny}
 \subsubsubsection{Entity Framework Core}
-Entity Framework Core (EF Core) je oficiální, open-source a cross-platform Object-Relational Mapper (ORM). Slouží jako moderní nástroj pro přístup k datům, který mapuje C\# objekty na relační databáze a eliminuje potřebu psát většinu ručního kódu pro komunikaci s databází.
+Entity Framework Core (EF Core) je oficiální, open-source a cross-platform Object-Relational Mapper (ORM). Slouží jako moderní nástroj pro přístup k datům, který mapuje \csharp{} objekty na relační databáze a eliminuje potřebu psát většinu ručního kódu pro komunikaci s databází.
 
 \subsubsubsection{AutoMapper}
-AutoMapper je open-source knihovna pro C\# a .NET, která slouží jako objektový mapper k automatizaci převodu dat mezi různými typy objektů. Eliminuje nutnost psát redundantní kód pro ruční kopírování vlastností, například při mapování entit z databáze na DTO (Data Transfer Objects) nebo ViewModels.
+AutoMapper je open-source knihovna pro \csharp{} a .NET, která slouží jako objektový mapper k automatizaci převodu dat mezi různými typy objektů. Eliminuje nutnost psát redundantní kód pro ruční kopírování vlastností, například při mapování entit z databáze na DTO (Data Transfer Objects) nebo ViewModels.
 
 \subsection{Podman}
 Vzhledem k tomu, že systém zpracovává a spouští neověřené zdrojové kódy od externích uchazečů, existovalo riziko spuštění malwaru nebo nekonečných smyček. Z tohoto důvodu byla představena kontejnerizace.
@@ -182,7 +182,7 @@ Po úspěšném doběhnutí předá testovací kontejner výsledná data do fron
 
 \section{Architektura a návrh systému}
 \subsection{Clean Architecture}
-Česky “Čistá architektura” je návrhový vzor, který definuje strukturu softwarového systému tak, aby byla nezávislá na frameworku, UI, databázi a externích agentech. Díky oddělení byznysové logiky a technických detailů, zajišťuje snadnou údržbu, testovatelnost a abstrakci mezi vrstvami.
+Česky \uv{Čistá architektura} je návrhový vzor, který definuje strukturu softwarového systému tak, aby byla nezávislá na frameworku, UI, databázi a externích agentech. Díky oddělení byznysové logiky a technických detailů, zajišťuje snadnou údržbu, testovatelnost a abstrakci mezi vrstvami.
 Podle striktního pravidla závislostí (angl. The Dependency Rule) je směr vrstev definován do středu. Vnitřní vrstvy nemají povědomí o tom, co se děje ve vnějších vrstvách.
 Vrstvy se dělí na následovné:
 \begin{itemize}
@@ -248,7 +248,7 @@ Aplikační vrstva obsahuje orchestraci datových toků a validační logiku pro
 Vysázení všech podstatných částí úvodu práce obstará makro \kiinlinecode{TeX}{!}{\\maketitle}. Pro správné vysázení všech částí a meta-informací je potřeba použí makra \kiinlinecode{TeX}{!}{\\title}, \mbox{\kiinlinecode{TeX}{!}{\\author}} a další. Jejich přehled lze najít ve zdrojovém souboru tohoto dokumentu. V případě použítí \textbf{pdf} výstupu se generuje i dodatečná hlavička souboru s meta-informacemi jako je autor dokumentu, název práce či dalšími.
 
 \subsection{Závěry}
-Závěr práce by se měl poskytnout jak v původním jazyce práce, tak v jazyce anglickém. Pro sazbu závěru jsou k dispozici příslušná makra. Berte na vědomí, že v anglickém závěru se aktivuje plně anglická sazba se všemi konvencemi. Tedy je třeba používat anglické uvozovky a další správné typografické prvky.
+Závěr práce by se měl poskytnout jak v původním jazyce práce, tak v jazyce anglickém. Pro sazbu závěru jsou k dispozici příslušná makra. Berte na vědomí, že , se aktivuje plně anglická sazba se všemi konvencemi. Tedy je třeba používat anglické uvozovky a další správné typografické prvky.
 
 \begin{kicode}{TeX}{}{Sazba závěrů}
 % Tiskne český závěr práce.
