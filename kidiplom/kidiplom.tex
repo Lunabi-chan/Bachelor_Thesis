@@ -206,16 +206,30 @@ Vrstva datových přenosových objektů představuje unifikovaný datový kontra
 \subsubsection{Doména}
 Doménová vrstva v projektu obsahuje byznys model nezávislý na jakýchkoli frameworcích, databázích či externích knihovnách. Zatímco ostatní vrstvy, kromě DTO vrstvy, mohou záviset na této, doménová nezávisí na jiné. V tomto specifickém systému existují projekty modelů pro abstrakce (rozhraní služeb), výjimky, nastavení a tak.
 
+\subsubsection{Aplikace}
+Aplikační vrstva obsahuje orchestraci datových toků a validační logiku procesů. Obsahuje tři složky s případy užití.
 
+\begin{itemize}
+\item \textbf{/AssignmentEvaluation} slouží k parsování poskytnutého URL ke Github repozitáři, zjistí se programovací jazyk pomocí GitHub API
+\item \textbf{/Services} je popis poskytovaných služeb.
+\begin{itemize}
+\item \textit{Assignment}: spravuje životní cyklus assignmentu a stav ukládá do databáze.
+\item \textit{Result}: zpracovává výstup po vyhodnocení, zparsuje stdout na build/run výstup, nastavuje příznaky úspěchu a ukládá výsledek do databáze.
+\item \textit{Value}: kontroluje hodnoty výstupu. Pro každé zadání by se měl tento modul měnit.
+\end{itemize}
+\item \textbf{/Validator} je složka pro služby, které se týkají validace.
+\end{itemize}
 
+\subsubsection{Infrastruktura}
 
 
 
 \subsection{Runners}
 
+\subsection{.gitlab-ci.yml}
 
 
-
+\section{Uživatelská dokumentace}
 
 
 
