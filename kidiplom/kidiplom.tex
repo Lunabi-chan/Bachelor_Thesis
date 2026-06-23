@@ -221,6 +221,9 @@ Aplikační vrstva obsahuje orchestraci datových toků a validační logiku pro
 \end{itemize}
 
 \subsubsection{Infrastruktura}
+Infrastrukturní vrstva zajišťuje komunikaci aplikace s externími komponentami a databází. Mezi její hlavní součástí patří \textit{Entity Framework Core} pro správu databáze. Dále se zde nachází \textit{PodmanManager}, který komunikuje se službou Podman přes HTTP REST rozhraní. Ten řídí spouštění a mazání kontejnerů. Infrastruktura obsahuje napojení na message broker \textit{RabbitMQ}, jenž zajišťuje asynchronní příjem zpráv z kontejnerů a jejich předání na zpracování. A nakonec \textit{GitHub API} pro zjištění jestli GitHub repozitář existuje a pro získání jeho programátorského jazyka.
+
+
 
 
 
