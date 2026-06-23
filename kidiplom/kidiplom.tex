@@ -223,11 +223,34 @@ Aplikační vrstva obsahuje orchestraci datových toků a validační logiku pro
 \subsubsection{Infrastruktura}
 Infrastrukturní vrstva zajišťuje komunikaci aplikace s externími komponentami a databází. Mezi její hlavní součástí patří \textit{Entity Framework Core} pro správu databáze. Dále se zde nachází \textit{PodmanManager}, který komunikuje se službou Podman přes HTTP REST rozhraní. Ten řídí spouštění a mazání kontejnerů. Infrastruktura obsahuje napojení na message broker \textit{RabbitMQ}, jenž zajišťuje asynchronní příjem zpráv z kontejnerů a jejich předání na zpracování. A nakonec \textit{GitHub API} pro zjištění jestli GitHub repozitář existuje a pro získání jeho programátorského jazyka.
 
-
-
-
-
 \subsection{Runners}
+Klíčovou součástí systému inQuest je sada exekučních běžců (runners) umístěných ve složce \textit{runners}. Struktura je rozdělena na základní shell skripty a dedikované složky pro jednotlivé technologické platformy.
+Složka \textit{baseScripts} zahrnuje skripty, které definují běh pro testované jazyky. Skládá se z následujících skriptů:
+
+\begin{itemize}
+\item \textbf{installPrerequisities.sh}: tento skript se nevyužívá za běhu kontejneru, ale zajišťuje instalaci dodatečných systémových nástrojů při vytváření obrazu. Stahuje git, jq pro manipulaci s JSON datami, curl pro odeslání dat a dos2unix pro konverzi řádkových konců mezi formáty specifické pro UNIX a Windows.
+
+\item \textbf{checkVariables.sh}: skript, který kontroluje přítomnost potřebných proměnných prostředí (environment variables) při startu kontejneru. Prvně jestli byl přiložen URL ke GitHub repozitáři a poté jestli má kontejner přístup k cestě pro access token. Ten je nezbytný jestli je repozitář soukromý. Ale i kdyby byl veřejný, je potřeba nastavit access token s podman secrets.
+
+\item \textbf{generateValidationResult.sh} a \textbf{reportResult.sh}: tyto skripty se starají o vygenerování a zformátování DTO s informací ohledně průběhu projektu uchazeče a jeho následného odeslání pomocí služby RabbitMQ do zprávové fronty. 
+
+\item \textbf{validate.sh}: obsahuje logiku pro stahování GitHub repozitáře, vyjmutí informací, spuštění konkrétní implementace jazykového skriptu \textit{start.sh} s timeoutem a vypsání následných zpráv po ukončení běhu projektu.
+
+\item \textbf{run.sh}: hlavní řídící skript, který orchestruje a spouští ostatní skripty. 
+\end{itemize}
+
+Konkrétní implementace pro jednotlivé jazykové se nachází pod složkami s jejich zkratkou. Využívá se výše popsaný základ se svou vlastní logikou a balí je do výsledného kontejnerového obrazu. Každá složka obsahuje: 
+
+\begin{itemize}
+\item \textbf{runnerScript-<language\_extension>.sh}: tento skript reprezentuje konkrétní implementaci daného jazyka. Kontroluje přítomnost povinných souborů v projektu a volá specifické příkazy technologie ke kompilaci a spuštění běhu.
+
+\item \textbf{Dockerfile}: definuje předpis pro sestavení obrazu. Přibalí se zde sdílené skripty, stáhnou se dodatečné systémové příkazy dle \textit{../installPrerequisities.sh}, přejmenuje se skript daného jazyka na \textit{start.sh} a nastaví se ENTRYPOINT na skript \textit{run.sh} 
+\end{itemize}
+
+Díky této architektuře je proces přidání nového jazyka velice snadné. Detailní popis je v dokumentaci nacházející se v \textit{documentation/testRunnerDocumentation.md}. 
+
+TODO/Poznámka: mám rozebrat/zkopírovat dokumentaci sem?
+
 
 \subsection{.gitlab-ci.yml}
 
