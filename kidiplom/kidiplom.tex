@@ -114,7 +114,7 @@
 
 %% Volitelné poděkování. Stručné! Výchozí je prázdné. Makro nemá
 %% nepovinný parametr pro uvedení jazyka.
-\thanks{TODO: Děkuji, děkuji, děkuji.}
+\thanks{Ráda bych poděkovala svému vedoucímu práce Mgr. Petru Osičkovi, Ph.D., za trpělivost a vstřícnost při tvorbě práce. Dále děkuji Mgr. Markétě Trnečkové, Ph.D., za její cenné rady a čas. Děkuji také svým přátelům za podporu během studia i mimo něj. Nakonec děkuji firmě Edhouse, pod kterou práce vznikla.}
 
 %% Cesta k souboru s bibliografií pro její sazbu pomocí BibLaTeXu
 %% (zvolenou nepovinným parametrem biblatex makra
@@ -150,11 +150,11 @@
 \section{Úvod}
 Firma Edhouse~\cite{edhouse}, zabývající se vývojem softwaru a hardwaru, přijímá každým rokem nové stážisty. Součástí přijímacího řízení je praktické ověření znalostí, v~jehož rámci společnost poskytne zájemci zadání úkolu a ten následně vypracuje své řešení ve svém preferovaném programovacím jazyce.
 
-S~rostoucím počtem uchazečů se ale tento proces setkal s~kapacitními omezeními. Odevzdaná řešení byla nejednotná. Lišila se adresářovou strukturou projektů anebo verzemi použitých jazyků. Vyhodnocování úkolů vyžadovalo manuální zásah mentorů, kteří museli zdrojové kódy ručně stahovat, nastavovat lokální prostředí, řešit závislosti a kód spouštět.
+S~rostoucím počtem uchazečů se ale tento proces stal neúnosným. Odevzdaná řešení byla nejednotná. Lišila se adresářovou strukturou projektů anebo verzemi použitých jazyků. Vyhodnocování úkolů vyžadovalo manuální zásah mentorů, kteří museli zdrojové kódy ručně stahovat, nastavovat lokální prostředí, řešit závislosti a kód spouštět.
 
-Vedle vysoké časové náročnosti, která prodlužovala délku náborového procesu a odváděla vývojáře od jejich primární práce, představovalo spouštění cizího a nedůvěryhodného kódu přímo na vývojářských prostředích bez dostatečné izolace rovněž bezpečnostní riziko pro interní infrastrukturu. Odlišnosti v~lokálním nastavení počítačů jednotlivých mentorů také mohly vést k~nekonzistentním výsledkům při kompilaci a spouštění řešení.
+Vedle vysoké časové náročnosti, která prodlužovala délku náborového procesu a odváděla vývojáře od jejich primární práce, představovalo spouštění cizího a nedůvěryhodného kódu přímo ve vývojářských prostředích bez dostatečné izolace rovněž bezpečnostní riziko pro interní infrastrukturu. Odlišnosti v~lokálním nastavení počítačů jednotlivých mentorů také mohly vést k~nekonzistentním výsledkům při kompilaci a spouštění řešení.
 
-Hlavní motivací pro vznik platformy \textbf{InQuest} je proto ucelená automatizace prvotní fáze vyhodnocování úkolů. Systém standardizuje proces tím, že vyžaduje sjednocenou adresářovou strukturu odevzdávaných úkolů. Dále zajišťuje autonomní stažení kódu, jeho verifikaci a především izolované spuštění v~izolovaném kontejnerovém prostředí. Díky této automatizaci jsou mentoři odproštěni od repetitivních úkonů a mohou se soustředit na architekturu řešení, čistotu kódu a celkovou kvalitu návrhu.
+Hlavní motivací pro vznik platformy \textbf{InQuest} je proto ucelená automatizace prvotní fáze vyhodnocování úkolů. Systém standardizuje proces tím, že vyžaduje sjednocenou adresářovou strukturu odevzdávaných úkolů. Dále zajišťuje automatizované stažení kódu, jeho verifikaci a spuštění v~izolovaném kontejnerovém prostředí. Díky této automatizaci jsou mentoři odproštěni od repetitivních úkonů a mohou se soustředit na architekturu řešení, čistotu kódu a celkovou kvalitu návrhu.
 
 
 \subsection{Analýza existujících řešení}
@@ -182,7 +182,7 @@ Hlavní výhodou je otevřenost projektu, modulární architektura a jednoduché
 
 
 \subsubsection{Shrnutí a porovnání analýzy}
-Z~provedené rešerše vyplývá, že existující systémy poskytují kvalitní dílčí funkce, avšak jsou primárně navrženy buď pro akademické prostředí, nebo fungují jako uzavřené komerční platformy. Otevřená exekuční API (např. Judge0) sice nabízejí bezpečné spouštění izolovaného kódu, neřeší však ucelený proces automatického zpracování celých repozitářů odevzdaných uchazeči.
+Z~provedené rešerše vyplývá, že existující systémy poskytují kvalitní dílčí funkce, avšak jsou primárně navrženy buď pro akademické prostředí, nebo fungují jako uzavřené komerční platformy. Otevřená exekuční API (např. Judge0) sice nabízejí spouštění izolovaného kódu, neřeší však ucelený proces automatického zpracování celých repozitářů odevzdaných uchazeči.
 
 Klíčové vlastnosti a odlišnosti analyzovaných řešení jsou přehledně shrnuty v~tabulce~\ref{tab:srovnanisys}.
 
@@ -193,16 +193,16 @@ Klíčové vlastnosti a odlišnosti analyzovaných řešení jsou přehledně sh
 		\hline
 		\textbf{Vlastnost / Systém} & \textbf{HackerRank} & \textbf{CodeRunner} & \textbf{Judge0} \\ \hline
 		\textbf{Komerční řešení} & Ano & Ne & Ne  \\ \hline
-		\textbf{Izolace} & Uzavřený Cloud & Sandbox & Docker kontejnery \\ \hline
+		\textbf{Izolace} & Uzavřený Cloud & Sandbox & sandboxové prostředí \\ \hline
 		\textbf{Kontrola adresáře} & Ne & Ne & Ne \\ \hline
-		\textbf{Vlastní zadání} & Omezená & Ano & Ano  \\ \hline
+		\textbf{Zadání na míru} & Omezená & Ano & Ano  \\ \hline
 		\textbf{Podpora více jazyků} & Ano & Ano & Ano \\ \hline
 	\end{tabular}
 	\caption{Srovnání vlastností analyzovaných systémů}
 	\label{tab:srovnanisys}
 \end{table}
 
-Jak ukazují data v~tabulce~\ref{tab:srovnanisys}, žádný ze stávajících systémů nenabízí automatizovanou kontrolu adresářové struktury odevzdaných projektů. Komerční nástroje neumožňují přímé napojení na interní vývojářské procesy a open-source alternativy se zaměřují pouze na spouštění jednotlivých skriptů či kódových fragmentů, nikoliv ucelených projektů s~vlastními závislostmi.
+Žádné z~analyzovaných řešení neposkytuje přímo pracovní postup kombinující převzetí URL soukromého GitHub repozitáře, automatické určení jazyka, kontrolu adresářové struktury a spuštění jazykově specifického runneru v~podobě požadované firmou Edhouse. HackerRank nabízí nástroje pro nábor a integraci s~dalšími systémy, jedná se však o~uzavřenou komerční platformu. Judge0 podporuje také vícesouborové programy a vlastní kompilační skripty, neposkytuje však přímo zpracování GitHub repozitářů a validační pravidla specifická pro systém InQuest.
 
 
 \subsection{Analýza problémů a požadavků}
@@ -220,7 +220,7 @@ Z~uvedených problémů vyplynuly hlavní požadavky na nový systém: sjednocen
 
 
 \subsection{Cíl práce}
-Cílem bakalářské práce je navrhnout a implementovat systém InQuest pro automatizované vyhodnocování programátorských úloh. Systém má přijmout odkaz na odevzdaný GitHub repozitář, zjistit použitý programovací jazyk, spustit řešení v~izolovaném prostředí a uložit výsledek jeho vyhodnocení.
+Na základě požadavků uvedených v~předchozí kapitole můžeme formulovat cíl bakalářské práce, a tím je navrhnout a implementovat systém InQuest pro automatizované vyhodnocování programátorských úloh. Systém má přijmout odkaz na odevzdaný GitHub repozitář, zjistit použitý programovací jazyk, spustit řešení v~izolovaném prostředí a uložit výsledek jeho vyhodnocení.
 
 Navržené řešení má omezit množství ruční práce mentorů, sjednotit způsob odevzdávání úloh a umožnit zadání požadavku i pracovníkům HR oddělení bez nutnosti používat vývojářské nástroje. Zpracování úloh má probíhat asynchronně, aby delší sestavení nebo spuštění jednoho projektu neblokovalo ostatní požadavky.
 
@@ -230,11 +230,11 @@ Součástí práce je také návrh modulární architektury, která umožní př
 
 
 \section{Použité technologie}
-Při návrhu systému bylo nutné zvolit technologie, které umožní bezpečné spouštění cizího zdrojového kódu, asynchronní komunikaci mezi jednotlivými komponentami a snadné rozšiřování o~podporu dalších programovacích jazyků. Tato kapitola představuje použité technologie, důvody jejich výběru a jejich roli v~navrženém systému.
+Při návrhu systému bylo nutné zvolit technologie, které umožní izolované spouštění cizího zdrojového kódu, asynchronní komunikaci mezi jednotlivými komponentami a snadné rozšiřování o~podporu dalších programovacích jazyků. Tato kapitola představuje použité technologie, důvody jejich výběru a jejich roli v~navrženém systému.
 
 
 \subsection{\csharp{} | .NET}
-Pro implementaci backendu byl vybrán jazyk \csharp{} na platformě .NET 8. Hlavními důvody byly podpora objektově orientovaného návrhu, silný typový systém, dostupnost nástrojů pro tvorbu webových API a vhodnost pro vrstvenou a modulární architekturu. Platforma .NET současně nabízí dobrou podporu asynchronního programování, dependency injection a běhu aplikací v~kontejnerovém prostředí.~\cite{dotnet}
+Pro implementaci backendu byl vybrán jazyk \csharp{} na platformě .NET 8. Hlavními důvody byly podpora objektově orientovaného návrhu, silný typový systém, dostupnost nástrojů pro tvorbu webových API a vhodnost pro vrstvenou a modulární architekturu. Platforma .NET současně nabízí dobrou podporu asynchronního programování (\kiinlinecode{text}{!}{async/await}), vestavěného mechanismu vkládání závislostí (\textit{dependency injection}) a běhu aplikací v~kontejnerovém prostředí.~\cite{dotnet}
 
 Při návrhu bylo možné využít také jiné technologie, například Java se Spring Boot nebo JavaScript s~prostředím Node.js. 
 
@@ -244,7 +244,7 @@ Významnější použité knihovny a frameworky .NET jsou popsány v~následují
 \subsubsection{ASP.NET Core Web API}
 ASP.NET Core Web API je framework určený pro vývoj webových služeb typu REST na platformě .NET. Umožňuje vytvářet lehká, rychlá a škálovatelná rozhraní HTTP, prostřednictvím kterých mohou mezi sebou komunikovat jednotlivé aplikace nezávisle na použité technologii.
 
-Pro tento projekt byl framework zvolen zejména kvůli přímé integraci s~platformou .NET, podpoře asynchronního zpracování požadavků (\kiinlinecode{text}{!}{async/await}) a vestavěnému mechanismu vkládání závislostí (\textit{dependency injection}). Důležitá byla také možnost snadno vytvářet a dokumentovat REST endpointy a oddělit prezentační vrstvu od aplikační logiky.
+Pro tento projekt byl framework zvolen zejména kvůli přímé integraci s~platformou .NET a podpoře asynchronního zpracování požadavků. Důležitá byla také možnost snadno vytvářet a dokumentovat REST endpointy a oddělit prezentační vrstvu od aplikační logiky.
 
 Rovněž podporuje směrování požadavků (\textit{routing}), middleware, práci s~chybovými stavy a zabezpečení. Pomocí Swagger UI (Swagger, viz podkapitolu~\ref{subsec:swagger}) lze automaticky vytvořit dokumentaci jednotlivých endpointů a zároveň je během vývoje přímo testovat.~\cite{aspnetwebapi}
 
@@ -254,7 +254,7 @@ Pro přístup k~datům byl zvolen framework Entity Framework Core (EF Core). Jed
 
 V~současné implementaci systému InQuest je použit poskytovatel \linebreak{} \texttt{Microsoft.EntityFrameworkCore.InMemory}. Datový model je tedy definován pomocí tříd v~aplikačním kódu, data však nejsou ukládána do trvalé relační databáze. Po ukončení nebo restartování backendové aplikace jsou uložené záznamy ztraceny.
 
-Vzhledem k~malému počtu entit by bylo možné použít také jednodušší řešení, EF Core ale poskytl jednotný způsob definice vztahů mezi entitami, dotazování pomocí LINQ a možnost pozdějšího nahrazení InMemory poskytovatele trvalou relační databází.
+Vzhledem k~malému počtu entit bylo možné uchovávat záznamy přímo v~kolekcích v~paměti aplikace. EF Core ale poskytl jednotný způsob definice vztahů mezi entitami, dotazování pomocí LINQ a možnost pozdějšího nahrazení \textit{InMemory} poskytovatele trvalou relační databází.
 
 
 \subsubsection{Swagger (OpenAPI)}
@@ -271,11 +271,11 @@ Bez využití mapovací knihovny je nutné každou vlastnost objektu při každ�
 
 
 \subsubsection{Serilog}
-Pro strukturované zaznamenávání diagnostických událostí během vývoje byla využita knihovna Serilog. Knihovna je nakonfigurována pro výstup do konzole (\textit{Console Sink}), kde zajišťuje přehledné formátování logů včetně zachování datových struktur požadavků, což usnadňuje ladění a sledování běhu API v~průběhu vývoje. Umožňuje zaznamenávat různé úrovně závažnosti událostí, jako jsou informace, varování nebo chyby.~\cite{serilog}
+Pro strukturované zaznamenávání diagnostických událostí během vývoje byla využita knihovna Serilog. Knihovna je nakonfigurována pro výstup do konzole (\textit{Console Sink}), kde zajišťuje přehledné formátování logů, což usnadňuje ladění a sledování běhu API v~průběhu vývoje. Umožňuje zaznamenávat různé úrovně závažnosti událostí, jako jsou informace, varování nebo chyby.~\cite{serilog}
 
 
 \subsection{Podman}
-Vzhledem k~tomu, že systém pracuje s~nedůvěryhodnými zdrojovými kódy od externích uchazečů, bylo nutné zajistit jejich bezpečné spouštění v~izolovaném prostředí. Z~tohoto důvodu byla zvolena kontejnerizace, která odděluje běh testované aplikace od hostitelského operačního systému.
+Vzhledem k~tomu, že systém pracuje s~nedůvěryhodnými zdrojovými kódy od externích uchazečů, bylo nutné zajistit jejich spouštění v~izolovaném prostředí. Z~tohoto důvodu byla zvolena kontejnerizace, která odděluje běh testované aplikace od hostitelského operačního systému.
 
 Při návrhu byly zvažovány nástroje Docker a Podman. Ačkoli jsou si oba nástroje z~hlediska spouštění kontejnerů a syntaxe příkazů či \texttt{Dockerfile} velmi blízké, pro tento projekt byl zvolen Podman. Hlavním důvodem byla jeho \textit{daemonless} architektura, podpora \textit{rootless} režimu a dostupné REST~API pro automatizované řízení kontejnerů~\cite{podman2}. Rootless režim umožňuje provozovat kontejnery pod běžným uživatelským účtem bez nutnosti udělit kontejnerovému procesu administrátorská oprávnění hostitelského systému.~\cite{podman}
 
@@ -304,7 +304,7 @@ V~systému InQuest se GitHub~API používá především pro ověření existenc
 
 Společně se systémem InQuest byla do navrženého náborového procesu zařazena služba GitHub Classroom~\cite{githubclass}. Ta sloužila k~vytváření soukromých repozitářů pro jednotlivé uchazeče a k~předávání připravených zadání. Uchazeč následně do přiděleného repozitáře odevzdal své řešení a jeho URL byla předána backendové aplikaci k~vyhodnocení.
 
-InQuest se službou GitHub Classroom na přímo nekomunikuje. Pracuje jen s~URL vytvořeného GitHub repozitáře. GitHub Classroom tak zajišťoval vytvoření a předání repozitáře, zatímco InQuest zajišťoval jeho následné automatizované zpracování a vyhodnocení.
+InQuest se službou GitHub Classroom přímo nekomunikuje. Pracuje jen s~URL vytvořeného GitHub repozitáře. GitHub Classroom tak zajišťoval vytvoření a předání repozitáře, zatímco InQuest zajišťoval jeho následné automatizované zpracování a vyhodnocení.
 
 Protože jsou odevzdané repozitáře soukromé, používá systém osobní přístupový token (\textit{Personal Access Token}). Backend jej využívá při ověření dostupnosti repozitáře a získání seznamu použitých jazyků prostřednictvím GitHub~API. Stejný token potřebuje také kontejnerový runner pro naklonování repozitáře. Token je na hostitelském serveru uložen pomocí již uvedeného mechanismu Podman Secrets a do backendového i testovacího kontejneru je připojen jako soubor.
 
@@ -318,7 +318,7 @@ V~projektu GitLab~CI/CD zajišťuje sestavení backendové aplikace, vytvoření
 
 Alternativou bylo například použití GitHub Actions nebo samostatného nástroje Jenkins. GitLab~CI/CD byl zvolen především proto, že zdrojový kód projektu i registr kontejnerových obrazů byly již spravovány v~prostředí GitLab v~rámci firmy. Nebylo proto nutné zavádět další službu ani řešit propojení mezi více platformami.
 
-Použití pipeline odstraňuje většinu manuálních kroků při sestavení a poskytuje okamžitou informaci~o tom, zda se jednotlivé části systému podařilo úspěšně vytvořit.
+Použití pipeline odstraňuje většinu manuálních kroků při sestavení a poskytuje okamžitou informaci o~tom, zda se jednotlivé části systému podařilo úspěšně vytvořit.
 
 
 \subsection{BASH skriptování}
@@ -335,19 +335,18 @@ Pro práci s~konfiguračními a textovými soubory byly využity standardní ná
 \section{Architektura a návrh systému}
 Na základě požadavků popsaných v~předchozí kapitole bylo navrženo řešení umožňující automatizované vyhodnocování programátorských úloh. Systém musí zajistit izolované spuštění nedůvěryhodného kódu, podporovat více programovacích jazyků, komunikovat s~externími službami a ukládat výsledky jednotlivých vyhodnocení. Současně bylo cílem navrhnout architekturu umožňující jednoduché rozšíření o~podporu dalších programovacích jazyků a další validační pravidla bez rozsáhlých změn v~hlavní aplikační logice.
 
-Z těchto důvodů byla backendová aplikace navržena podle principů Clean Architecture, která odděluje aplikační a doménovou logiku od databáze, webového rozhraní a externích služeb. Změna konkrétní infrastrukturní technologie tak nemusí přímo ovlivnit hlavní logiku systému.
+Z~těchto důvodů byla backendová aplikace navržena podle principů Clean Architecture, která odděluje aplikační a doménovou logiku od databáze, webového rozhraní a externích služeb. Změna konkrétní infrastrukturní technologie tak nemusí přímo ovlivnit hlavní logiku systému.
 
 \subsection{Clean Architecture}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.9\textwidth]{graphics/CleanArchitecture.jpg}  
-	\caption{Čistá architektura}
+	\caption{Čistá architektura, převzato z~\cite{clearch}}
 	\label{fig:clearch}
 \end{figure}
 
-
-Clean Architecture, česky \uv{Čistá architektura} je návrhový princip, který definuje strukturu softwarového systému tak, aby byla nezávislá na frameworku, UI, databázi a externích agentech. Díky oddělení byznysové logiky a technických detailů zajišťuje snadnou údržbu, testovatelnost a abstrakci mezi vrstvami.
+Clean Architecture, česky \uv{Čistá architektura}, je návrhový princip, který definuje strukturu softwarového systému tak, aby byla nezávislá na frameworku, UI, databázi a externích agentech. Díky oddělení byznysové logiky a technických detailů zajišťuje snadnou údržbu, testovatelnost a abstrakci mezi vrstvami.
 
 Podle striktního pravidla závislostí (angl. The Dependency Rule) je směr vrstev definován do středu. Vnitřní vrstvy nemají povědomí o~tom, co se děje ve vnějších vrstvách.~\cite{clearch}
 
@@ -358,7 +357,7 @@ Architektura se skládá z~následujících vrstev:
 	\item \textbf{Doménová} (\textit{Domain}) se nachází v~samotném jádře architektury. Obsahuje základní doménové modely, výjimky a pravidla, která nejsou závislá na databázi, webovém rozhraní ani externích knihovnách.
 	\item \textbf{Aplikační} (\textit{Application}) obsahuje případy užití systému a řídí průběh jednotlivých operací. V~systému InQuest zajišťuje například vytvoření požadavku na vyhodnocení, validaci vstupních údajů a zpracování přijatého výsledku.
 	\item \textbf{Infrastrukturní} (\textit{Infrastructure}) implementuje komunikaci s~databází a externími službami. Patří sem například přístup k~databázi pomocí Entity Framework Core, řízení kontejnerů přes Podman, komunikace s~RabbitMQ a získávání údajů prostřednictvím GitHub~API.
-	\item \textbf{Prezentační} (\textit{Presentation}): vystavuje koncové body pro komunikaci přes HTTP. Příjímá požadavky klienta, předává je aplikační vrstvě a převádí výsledky zpracování do odpovídajících HTTP odpovědí.
+	\item \textbf{Prezentační} (\textit{Presentation}): vystavuje koncové body pro komunikaci přes HTTP. Přijímá požadavky klienta, předává je aplikační vrstvě a převádí výsledky zpracování do odpovídajících HTTP odpovědí.
 \end{itemize}
 
 Konkrétní rozdělení backendové aplikace do uvedených vrstev a odpovědnosti jednotlivých projektů jsou popsány v~podkapitole~\ref{subsec:backend}.
@@ -387,7 +386,7 @@ Projekt obsahuje složku \textit{Controllers}, ve které jsou definovány jednot
 
 \textbf{Projekt DTO} představuje unifikovaný datový kontrakt pro celý systém. DTO jsou reprezentovány jako třídy bez byznys logiky, které přenášejí data mezi jednotlivými vrstvami a externími systémy.
 
-\textbf{Doménová vrstva} představuje vnitřní část aplikace a obsahuje základní modely systému, abstrakce služeb, vlastní výjimky a konfigurační objekty. Tato vrstva není závislá na webovém frameworku, databázi ani konkrétních externích službách. Ostatní vrstvy mohou využívat modely a rozhraní, která jsou v~ní definována. V~tomto specifickém systému jsou popsány modely pro abstrakce (rozhraní služeb), výjimky, nastavení a~tak.
+\textbf{Doménová vrstva} představuje vnitřní část aplikace a obsahuje základní modely systému, abstrakce služeb, vlastní výjimky a konfigurační objekty. Tato vrstva není závislá na webovém frameworku, databázi ani konkrétních externích službách. Ostatní vrstvy mohou využívat modely a rozhraní, která jsou v~ní definována. V~tomto specifickém systému jsou popsány modely pro abstrakce (rozhraní služeb), vlastní výjimky, nastavení a třídy s~nastavením aplikace.
 
 \textbf{Aplikační vrstva} obsahuje orchestraci datových toků a validační logiku procesů. Jejím úkolem je například validace vstupních údajů, vytvoření požadavku na vyhodnocení a zpracování výsledku přijatého z~kontejnerového prostředí. Implementace je rozdělena do několika částí:
 
@@ -396,7 +395,7 @@ Projekt obsahuje složku \textit{Controllers}, ve které jsou definovány jednot
 	\item \textbf{\texttt{/Services}} je popis poskytovaných služeb.
 	\begin{itemize}
 		\item \texttt{Assignment}: spravuje životní cyklus požadavku a stav ukládá do databáze.
-		\item \texttt{Result}: zpracovává výstup po vyhodnocení, rozdělí standardní výstup na informace o~sestavení a spuštění, nastavuje příznaky úspěchu a ukládá výsledek do databáze.
+		\item \texttt{Result}: zpracovává výstup po vyhodnocení, rozděluje standardní výstup na informace o~sestavení a spuštění, nastavuje příznaky úspěchu a ukládá výsledek do databáze.
 		\item \texttt{Value}: kontroluje hodnoty získané z~výstupu řešení uchazeče vůči očekávaným hodnotám. Pro každé zadání se modul mění.
 	\end{itemize}
 	\item \textbf{\texttt{/Validator}} je složka pro služby, které se týkají validace.
@@ -419,7 +418,7 @@ Jednotlivé runnery sdílejí společnou část implementace, která zajišťuje
 Společná část runnerů obsahuje následující skripty:
 
 \begin{itemize}
-	\item \textbf{\texttt{checkVariables.sh}} je skript, který kontroluje přítomnost požadovaných vstupních údajů při startu kontejneru. Nejprve ověří, zda byla přiložena URL adresa ke GitHub repozitáři a poté jestli má kontejner přístup k~cestě pro access token v~Podman secrets. Token je nutný pro práci se soukromými repozitáři (a k~funkčnosti i s~veřejnými) a je do kontejneru předáván prostřednictvím mechanismu Podman Secrets.
+	\item \textbf{\texttt{checkVariables.sh}} je skript, který kontroluje přítomnost požadovaných vstupních údajů při startu kontejneru. Nejprve ověří, zda byla předána URL adresa GitHub repozitáře a poté jestli má kontejner přístup k~cestě pro access token v~Podman secrets. Token je nutný pro práci se soukromými repozitáři (a k~funkčnosti i s~veřejnými) a je do kontejneru předáván prostřednictvím mechanismu Podman Secrets.
 	\item \textbf{\texttt{generateValidationResult.sh}} vytváří výstupní datovou strukturu obsahující informace o~průběhu a výsledku vyhodnocení. 
 
 	\item \textbf{\texttt{reportResult.sh}} je skript, který výsledek odešle prostřednictvím RabbitMQ do zprávové fronty, odkud jej převezme backendová aplikace.
@@ -434,7 +433,7 @@ Každá jazyková složka obsahuje zejména následující soubory:
 \begin{itemize}
 	\item \textbf{\texttt{runnerScript-<language\_extension>.sh}} reprezentuje konkrétní implementaci daného jazyka. Ověřuje přítomnost povinných souborů v~projektu a spouští odpovídající příkazy technologie ke kompilaci a spuštění běhu.
 
-	\item \textbf{\texttt{Dockerfile}} definuje předpis pro sestavení kontejnerového obrazu runneru. Přibalí se zde sdílené skripty a stáhnou se dodatečné systémové příkazy podle skriptu \texttt{../installPrerequisities.sh}. Jazykově specifický skript je při sestavení přejmenován na \texttt{start.sh} a jako vstupní bod kontejneru je nastaven skript \texttt{run.sh}.
+	\item \textbf{\texttt{Dockerfile}} definuje předpis pro sestavení kontejnerového obrazu runneru. Přibalí se zde sdílené skripty a nainstalují se dodatečné systémové příkazy podle skriptu \texttt{../installPrerequisities.sh}. Jazykově specifický skript je při sestavení přejmenován na \texttt{start.sh} a jako vstupní bod kontejneru je nastaven skript \texttt{run.sh}.
 \end{itemize}
 
 Přidání podpory nového jazyka proto spočívá především ve vytvoření nové složky, definici odpovídajícího kontejnerového obrazu a implementaci jazykově specifického skriptu. Nový runner je dále nutné zaregistrovat v~souboru \linebreak{} \texttt{appsettings.json}, kde se uvede název jazyka, jméno obrazu a jeho verze. Pokud výstup nového jazyka nelze zpracovat univerzálním parserem, může být nutné upravit také třídu \texttt{ResultService}.
@@ -459,7 +458,7 @@ Pipeline je rozdělena do fází \textit{update}, \textit{build}, \textit{test},
 		\item Pro každý runner je načten příslušný soubor \texttt{Dockerfile}. Pomocí nástroje \kiinlinecode{text}{!}{sed} je z~instrukce \kiinlinecode{text}{!}{FROM ... AS final} získána verze použitého základního obrazu.
 		\item Na základě názvu jazyka a získané verze je sestaven tag výsledného obrazu, například \texttt{test-runner-cs:8.0}.
 		\item Pro každý nalezený jazyk je spuštěno sestavení kontejnerového obrazu.
-		\item Dynamicky sestaví tag obrazu (např. test-runner-cs:8.0) a spustí \kiinlinecode{text}{!}{docker build}.
+		\item Dynamicky sestaví tag obrazu získaného z~kroku 3 a spustí \kiinlinecode{text}{!}{docker build}.
 		\item Seznam nově vytvořených obrazů je uložen a předán další úloze, která zajistí jejich hromadné odeslání do registru. 
 	\end{enumerate}
 \end{itemize}
@@ -542,6 +541,48 @@ REST~API zpřístupňuje hlavní případy užití systému klientským aplikac�
 
 Požadavky \kiinlinecode{text}{!}{POST} a \kiinlinecode{text}{!}{PUT} přijímají objekt obsahující URL repozitáře. Opakované vyhodnocení se tedy nevyhledává podle identifikátoru v~adrese endpointu, ale podle URL předané v~těle požadavku.
 
+
+\subsection{Ukázka rozhraní Swagger UI}
+Rozhraní Swagger UI bylo během implementace využíváno k~zobrazení dokumentace a ručnímu ověřování jednotlivých endpointů REST~API. Dokumentace je automaticky generována z~definovaných kontrolerů, datových modelů a dokumentačních komentářů ve zdrojovém kódu. U~každého endpointu uvádí použitou HTTP metodu, očekávané vstupy, strukturu těla požadavku a možné návratové kódy.
+
+Na obrázku~\ref{fig:swaggerOverview} je zobrazen přehled operací poskytovaných kontrolerem \textit{Assignments}. Rozhraní zpřístupňuje operace pro vytvoření požadavku na vyhodnocení, získání uložených zadání, opakované spuštění vyhodnocení a odstranění konkrétního záznamu. Jednotlivé operace lze ve Swagger UI rozbalit a následně přímo volat.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{graphics/SwaggerHome.png}
+	\caption{Přehled endpointů systému ve Swagger UI}
+	\label{fig:swaggerOverview}
+\end{figure}
+
+Příklad vytvoření požadavku na vyhodnocení je znázorněn na obrázku~\ref{fig:swaggerPost}. Endpoint \kiinlinecode{text}{!}{POST /api/Assignments} přijímá tělo ve formátu JSON obsahující URL GitHub repozitáře. Po stisknutí tlačítka \textit{Execute} odešle Swagger UI požadavek backendové aplikaci.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{graphics/SwaggerPOST.png}
+	\caption{Odeslání požadavku na vyhodnocení ve Swagger UI}
+	\label{fig:swaggerPost}
+\end{figure}	
+
+Při úspěšném přijetí požadavku vrací API stavový kód \kiinlinecode{text}{!}{201 Created} a objekt typu \texttt{AssignmentDto}, jak je znázorněno na obrázku~\ref{fig:swaggerPostResponse}. Odpověď obsahuje identifikátor vytvořeného zadání, URL repozitáře, čas vytvoření, aktuální stav a případný poslední výsledek.
+
+V~uvedeném příkladu odpovídá hodnota položky \kiinlinecode{text}{!}{state} probíhajícímu vyhodnocení a položka \kiinlinecode{text}{!}{latestResult} zatím neobsahuje žádnou hodnotu. Důvodem je zpracování repozitáře, které v~okamžiku vytvoření odpovědi ještě nebylo dokončeno.
+
+\begin{figure}[H]	
+	\centering
+	\includegraphics[width=0.9\textwidth]{graphics/SwaggerPOSTResponse.png}
+	\caption{Odpověď API ve Swagger UI}
+	\label{fig:swaggerPostResponse}
+\end{figure}
+
+Aktuální stav zadání a jeho výsledek lze následně získat prostřednictvím požadavku \kiinlinecode{text}{!}{GET /api/Assignments}. Ukázka na obrázku~\ref{fig:swaggerGet} zachycuje odpověď se stavovým kódem \kiinlinecode{text}{!}{200 OK} po dokončení vyhodnocení. Položka \kiinlinecode{text}{!}{latestResult} obsahuje identifikátor zpracovaného commitu, rozpoznaný programovací jazyk, výsledky inicializace, sestavení a spuštění projektu a související textové výstupy. Klientská aplikace tak může pomocí REST~API zjistit nejen aktuální stav zadání, ale také podrobnosti o~průběhu jeho zpracování.
+
+\begin{figure}[H]
+	\centering
+	 \includegraphics[width=0.9\textwidth]{graphics/SwaggerGET.png}
+	\caption{Získání dokončeného výsledku vyhodnocení pomocí Swagger UI}
+	\label{fig:swaggerGet}
+\end{figure}
+
 \newpage
 
 
@@ -558,7 +599,7 @@ Navržený systém byl vytvořen s~důrazem na modularitu a snadnou rozšiřitel
 	Současná implementace používá validační pravidla definovaná přímo v~systému. V~budoucnu by bylo vhodné umožnit zadavateli úlohy nastavit očekávaný výsledek, podle kterého má být odevzdané řešení vyhodnoceno. Tím by bylo možné systém využít pro větší množství různých zadání bez nutnosti upravovat validační logiku v~aplikačním kódu. 
 
 	\item \textbf{Automatizované testování v~CI/CD}:
-	Současná CI/CD pipeline zajišťuje sestavení aplikace a vytvoření kontejnerových obrazů. V~budoucnu by bylo vhodné pipeline rozšířit o~fázi, která zajišťuje automatické spouštění testů před samotným sestavením a nasazením aplikace. Díky tomu by bylo možné zachytit případné chyby během vývojového procesu a zabránit nasazení nefunkčních verzí systému.
+	Současná CI/CD pipeline zajišťuje sestavení aplikace a vytvoření kontejnerových obrazů. V~budoucnu by bylo vhodné pipeline rozšířit o~fázi, která by zajišťovala automatické spouštění testů před samotným sestavením a nasazením aplikace. Díky tomu by bylo možné zachytit případné chyby během vývojového procesu a zabránit nasazení nefunkčních verzí systému.
 	
 	\item \textbf{Podpora dalších programovacích jazyků}:
 	Architektura systému byla navržena tak, aby bylo možné jednoduše přidávat podporu dalších programovacích jazyků. Rozšíření spočívá především ve vytvoření nového runneru obsahujícího odpovídající kontejnerový obraz a skript definující proces sestavení a spuštění projektu. V~současné verzi systém podporuje jazyky \csharp{}, \cpp{}, Java, Python, Rust a JavaScript.
@@ -584,7 +625,7 @@ Cílem bakalářské práce bylo navrhnout a implementovat systém InQuest pro a
 
 Backendová aplikace byla navržena podle principů Clean Architecture a implementována na platformě .NET. Nedůvěryhodný zdrojový kód je spuštěn v~izolovaném kontejnerovém prostředí spravovaném pomocí Podmanu, zatímco výsledky jsou asynchronně předávány pomocí RabbitMQ. Důležitou součástí řešení jsou samostatné runnery pro jednotlivé programovací jazyky, které umožňují systém dále rozšiřovat bez výrazných změn hlavní aplikační logiky.
 
-Výsledkem práce je funkční prototyp, který omezuje ruční práci mentorů, sjednocuje způsob zpracování odevzdaných úloh a snižuje rizika spojená se spouštěním nedůvěryhodného kódu. Stanovený cíl práce byl naplněn, přesto existuje prostor pro zlepšení.
+Výsledkem práce je funkční prototyp, který snižuje manuální práci mentorů, sjednocuje způsob zpracování odevzdaných úloh a snižuje rizika spojená se spouštěním nedůvěryhodného kódu. V~rozsahu této práce bylo ověřeno základní fungování navrženého postupu, přesto existuje prostor pro zlepšení.
 \end{kiconclusions}
 
 \begin{kiconclusions}[english]
@@ -592,7 +633,7 @@ The aim of this bachelor's thesis was to design and implement the InQuest system
 
 The backend application was designed according to the principles of Clean Architecture and implemented on the .NET platform. The untrusted source code is executed in an isolated container environment managed by Podman, while the results are transmitted asynchronously using RabbitMQ. An important part of the solution is the use of separate runners for individual programming languages, which allow the system to be further expanded without significant changes to the main application logic.
 
-The result of the thesis is a functional prototype that reduces the amount of manual work required from mentors, unifies the processing of submitted assignments and reduces the risks associated with running untrusted code. The defined objective of the thesis was achieved, though there is still room for improvement.
+The result of the thesis is a functional prototype that reduces the amount of manual work required from mentors, unifies the processing of submitted assignments and reduces the risks associated with running untrusted code. The scope of this thesis was verification of the basic functionality of the proposed approach, however, there is still room for improvement.
 \end{kiconclusions}
 
 
@@ -613,7 +654,7 @@ Přiložená elektronická data obsahují:
   závazného stylu KI PřF UP v~Olomouci pro závěrečné práce, včetně
   všech (textových) příloh, a všechny soubory potřebné pro
   bezproblémové vytvoření PDF dokumentu textu (případně v~ZIP
-  archivu), tj.~zdrojový text textu a příloh, vložené obrázky, apod.
+  archivu), tj.~zdrojový text práce a příloh, vložené obrázky apod.
 
 
 \item[\texttt{README.md}] \hfill \\
